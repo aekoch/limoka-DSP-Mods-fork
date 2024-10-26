@@ -5,7 +5,7 @@ schemaVersion = "0.0.1"
 namespace = "CommonAPI"
 name = "DSPModSave"
 description = "Library that allows to store mod save data separately from vanilla saves"
-versionNumber = "1.2.1"
+versionNumber = "1.2.2"
 websiteUrl = "https://github.com/kremnev8/DSP-Mods/tree/master/Mods/DSPModSave"
 containsNsfwContent = false
 
@@ -26,6 +26,6 @@ outdir = "./../Build"
   target = "./"
 
 [publish]
-repository = "https://dsp.thunderstore.io"
+repository = "https://thunderstore.io"
 communities = [ "dyson-sphere-program" ]
 categories = [ "libraries" ]
