@@ -5,7 +5,7 @@ schemaVersion = "0.0.1"
 namespace = "kremnev8"
 name = "BlueprintTweaks"
 description = "Improves Blueprint system with QoL changes, new features like force pasting, foundation blueprints and more"
-versionNumber = "1.6.4"
+versionNumber = "1.6.5"
 websiteUrl = "https://github.com/kremnev8/DSP-Mods/tree/master/Mods/BlueprintTweaks"
 containsNsfwContent = false
 
@@ -29,6 +29,6 @@ outdir = "./../Build"
   target = "./"
 
 [publish]
-repository = "https://dsp.thunderstore.io"
+repository = "https://thunderstore.io"
 communities = [ "dyson-sphere-program" ]
-categories = [ "quality-of-life", "nebula-compatible", "blueprints" ]
+categories = [ ]

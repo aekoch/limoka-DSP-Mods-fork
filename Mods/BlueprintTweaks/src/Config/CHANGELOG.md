@@ -1,3 +1,9 @@
+### v1.6.5
+- Updated to work with game version 0.10.32.25496 or higher
+
+<details>
+<summary>Full changelog</summary>
+
 ### v1.6.4
 - Fixed mod not working with Nebula Multiplayer Mod API version 2.0.0 or higher
 
@@ -13,9 +19,6 @@
 - Fixed issue where belt ports were not mirrored properly (Affects Logistic stations, splitters, etc.)
 - Fixed issue where in certain situations blueprint foundations would not be shown
 - Fixed drag remove button not showing hover and highlight states
-
-<details>
-<summary>Full changelog</summary>
 
 ### v1.6.0
 - Added feature that allows foundations to be auto generated for any of your blueprints. The feature has a few modes that allow customization of the foundation patterns.

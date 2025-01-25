@@ -20,6 +20,7 @@ namespace BlueprintTweaks
 
         [HarmonyPatch(typeof(BlueprintUtils), "GenerateBlueprintData")]
         [HarmonyTranspiler]
+        [HarmonyDebug]
         static IEnumerable<CodeInstruction> AddMoreData(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
         {
             CodeMatcher matcher = new CodeMatcher(instructions, generator)
@@ -133,9 +134,21 @@ namespace BlueprintTweaks
             matcher.MatchForward(true,
                     new CodeMatch(OpCodes.Ldc_I4_0),
                     new CodeMatch(OpCodes.Newarr),
-                    new CodeMatch(OpCodes.Stfld))
-                .Advance(8)
-                .CreateLabel(out Label exitLabel)
+                    new CodeMatch(OpCodes.Stfld));
+
+            var indexPlusPlusMatches = new[]
+            {
+                new CodeMatch(OpCodes.Ldloc_S),
+                new CodeMatch(OpCodes.Ldc_I4_1),
+                new CodeMatch(OpCodes.Add),
+                new CodeMatch(OpCodes.Stloc_S)
+            };
+
+            // Go to second next i++ operation (areaCount loop)
+            matcher.MatchForward(false, indexPlusPlusMatches).Advance(1);
+            matcher.MatchForward(false, indexPlusPlusMatches);
+                
+            matcher.CreateLabel(out Label exitLabel)
                 .Advance(-2)
                 .InsertAndAdvance(new CodeInstruction(OpCodes.Pop))
                 .InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_2))
