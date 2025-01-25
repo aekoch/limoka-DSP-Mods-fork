@@ -20,7 +20,6 @@ namespace BlueprintTweaks
 
         [HarmonyPatch(typeof(BlueprintUtils), "GenerateBlueprintData")]
         [HarmonyTranspiler]
-        [HarmonyDebug]
         static IEnumerable<CodeInstruction> AddMoreData(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
         {
             CodeMatcher matcher = new CodeMatcher(instructions, generator)

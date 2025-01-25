@@ -1,4 +1,4 @@
-### v1.6.5
+### v1.6.5-6
 - Updated to work with game version 0.10.32.25496 or higher
 
 <details>
