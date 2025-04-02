@@ -201,7 +201,7 @@ namespace BlueprintTweaks
                     tool.castGroundPos = BlueprintUtils.GetDir(longitude, latitude) * tool.castGroundPos.magnitude;
                 }));
 
-            matcher.MatchForward(false, new CodeMatch(OpCodes.Callvirt, AccessTools.Method(typeof(PlanetAuxData), nameof(PlanetAuxData.Snap))))
+            matcher.MatchForward(false, new CodeMatch(OpCodes.Callvirt, AccessTools.Method(typeof(PlanetAuxData), nameof(PlanetAuxData.Snap), new []{typeof(Vector3), typeof(bool)})))
                 .SetInstruction(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(GridSnappingPatches), nameof(SnapModified))));
 
             return matcher.InstructionEnumeration();
@@ -236,8 +236,14 @@ namespace BlueprintTweaks
                     tool.castGroundPos = BlueprintUtils.GetDir(longitude, latitude) * tool.castGroundPos.magnitude;
                 }));
 
-            matcher.MatchForward(false, new CodeMatch(OpCodes.Callvirt, AccessTools.Method(typeof(PlanetAuxData), nameof(PlanetAuxData.Snap))))
-                .SetInstruction(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(GridSnappingPatches), nameof(SnapModified))));
+            var snapFun = AccessTools.Method(typeof(PlanetAuxData), nameof(PlanetAuxData.Snap), new[] { typeof(Vector3), typeof(bool) });
+
+            matcher
+                .MatchForward(false, new CodeMatch(OpCodes.Callvirt, snapFun))
+                .Repeat(codeMatcher =>
+                {
+                    codeMatcher.SetInstruction(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(GridSnappingPatches), nameof(SnapModified))));
+                });
 
             return matcher.InstructionEnumeration();
         }
